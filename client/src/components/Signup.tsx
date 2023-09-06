@@ -19,7 +19,7 @@ function SignupPage({ onClickToggleModal, onClickToggleSignupModal, isLogin, set
     const [emailError, setEmailError] = useState<string>('');
 
     function isNameValid(name: string): boolean {
-        const regex = /^[가-힣]{2,5}$/;
+        const regex = /^[가-힣]{3,12}$/;
         return regex.test(name);
     }
 

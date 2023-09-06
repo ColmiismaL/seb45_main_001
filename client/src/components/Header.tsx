@@ -9,15 +9,15 @@ import type { AppDispatch } from '../store/authstore';
 import { Link } from 'react-router-dom';
 
 const HeaderStyle = styled.header`
-    // width: 100%;
-    // height: 56px;
-    // display: flex;
-    // align-items: center;
-    // z-index: 1001;
-    // /* background-color: #1d1d1d; */
-    // background-color: transparent;
-    // /* 백그라운드는 나중에 투명으로 바꿀 것 */
-    // position: fixed;
+    /* width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    z-index: 1001;
+    background-color: #1d1d1d;
+    background-color: transparent;
+    백그라운드는 나중에 투명으로 바꿀 것
+    position: fixed; */
     position: fixed;
     top: 0;
     width: 100%;

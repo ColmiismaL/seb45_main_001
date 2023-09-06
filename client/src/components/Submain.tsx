@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
 import logo from '../assets/port.jpg';
-import logo2 from '../assets/오펜포스터.jpg';
 import Header from './Header'
 
 const SubcontainerStyle = styled.div`
@@ -164,7 +163,7 @@ const Submain = () => {
                 </PosterStyle>
                 <MainStyle>
                 <Moivetextform>
-                    <MoivePoster src={logo2}>
+                    <MoivePoster>
                     </MoivePoster>
                     <Movidetail>
                     <TextForm>
