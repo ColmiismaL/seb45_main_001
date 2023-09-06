@@ -70,12 +70,10 @@ function LoginPage({ onClickToggleModal, onClickToggleSignupModal , isLogin, set
         console.log('로그인 data 슛', myId);
         apiCall({
             method: 'POST',
-            url: 'login',
+            url: 'host/signin',
             data: myId,
         })
             .then((response) => {
-                localStorage.setItem('jwt', response.data.accessToken);
-                localStorage.setItem("memberid",response.data.user.id)
                 setIsLogin(true);
                 onClickToggleModal?.();
                 console.log('로그인 성공', response);

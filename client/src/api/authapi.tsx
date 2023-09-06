@@ -1,8 +1,10 @@
 import axios, { AxiosResponse, AxiosError, Method } from 'axios';
 
-export const localapiUrl = ``;
+export const localapiUrl = `http://52.79.212.94:8080`;
 export const apiUrl = ``;
 export const jsonUrl = `http://localhost:5002`;
+
+export const lastUrl = `${localapiUrl}`;
 
 function getToken() {
     return localStorage.getItem('jwt');
@@ -20,8 +22,9 @@ type ApiConfig<D> = {
 };
 
 export function apiCall<T = any, D = any>(config: ApiConfig<D>): Promise<AxiosResponse<T>> {
-    const fullUrl = `${jsonUrl}/${config.url}`;
+    const fullUrl = `${lastUrl}/${config.url}`;
     console.log('api:', fullUrl);
+    console.log('origin', location.origin);
 
     return axios({
         method: config.method,

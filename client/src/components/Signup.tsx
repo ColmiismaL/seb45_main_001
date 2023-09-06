@@ -11,7 +11,7 @@ interface LoginPageProps {
 }
 
 function SignupPage({ onClickToggleModal, onClickToggleSignupModal, isLogin, setIsLogin }: LoginPageProps) {
-    const [name, setName] = useState<string>('');
+    const [nickName, setNickName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [nameError, setNameError] = useState<string>('');
@@ -54,8 +54,8 @@ function SignupPage({ onClickToggleModal, onClickToggleSignupModal, isLogin, set
             } else {
                 setPasswordError('');
             }
-        } else if (name === 'name') {
-            setName(value);
+        } else if (name === 'nickName') {
+            setNickName(value);
             if (value === '') {
                 setNameError('');
             } else if (!isNameValid(value)) {
@@ -80,14 +80,14 @@ function SignupPage({ onClickToggleModal, onClickToggleSignupModal, isLogin, set
 
     const handleSubmit = () => {
         const myId = {
-            name,
+            nickName,
             email,
             password,
         };
         console.log('회원가입 data 슛', myId);
         apiCall({
             method: 'POST',
-            url: 'register',
+            url: 'host/signup',
             data: myId,
         })
             .then((response) => {
@@ -109,8 +109,8 @@ function SignupPage({ onClickToggleModal, onClickToggleSignupModal, isLogin, set
                         <LoginModallogin>회원가입</LoginModallogin>
                         <LoginModalinput
                             placeholder="이름"
-                            name="name"
-                            value={name}
+                            name="nickName"
+                            value={nickName}
                             onChange={handleInputChange}
                         ></LoginModalinput>
                         <LoginModalinput

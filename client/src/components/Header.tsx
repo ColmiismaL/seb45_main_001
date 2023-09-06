@@ -7,6 +7,8 @@ import { fetchUserById } from '../slice/authslice';
 import { RootState } from '../store/authstore';
 import type { AppDispatch } from '../store/authstore';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { lastUrl } from '../api/authapi';
 
 const HeaderStyle = styled.header`
     /* width: 100%;
@@ -40,45 +42,54 @@ const Headerwrap = styled.div`
     align-items: center;
 `;
 
-// const [서버세션확인데이터위치, set서버세션확인데이터위치] = useState(false);
-// const [유저, set유저] = useState(null);
+// const isTokenExpired = (token: string): boolean => {
+//     try {
+//         const decodedToken: any = JSON.parse(atob(token.split('.')[1]));
+//         const currentTime = Date.now() / 1000;
+//         return decodedToken.exp && currentTime > decodedToken.exp;
+//     } catch (error) {
+//         return true;
+//     }
+// };
+
+// const users = useSelector((state: RootState) => state.data.users);
+// const memberId = localStorage.getItem('memberid');
+// const user = memberId ? users?.[memberId] : undefined;
+// const token = localStorage.getItem('jwt');
+
+// const [isLogin, setIsLogin] = useState<boolean>(() => {
+//     return token ? !isTokenExpired(token) : false;
+// });
+
+// console.log('Member ID:', memberId);
+// console.log('User Data:', user);
 
 // useEffect(() => {
-//     axios
-//         .get('세션로그인유지엔드포인트')
-//         .then((response) => {
-//             if (response.data.서버세션확인데이터위치) {
-//                 setIsAuthenticated(true);
-//                 setUser(response.data.유저);
-//             }
-//         })
-//         .catch((error) => {
-//             console.error('로그인 상태 확인 중 오류 발생:', error);
-//         });
-// }, []); 세션용 로그인 유지
+//     if (memberId && !user) {
+//         dispatch(fetchUserById(memberId));
+//     }
+// }, [memberId, user, dispatch]);
 
 function Header() {
     const dispatch: AppDispatch = useDispatch();
     const [isMagnifierClicked, setisMagnifierClicked] = useState<boolean>(false);
 
-    const isTokenExpired = (token: string): boolean => {
-        try {
-            const decodedToken: any = JSON.parse(atob(token.split('.')[1]));
-            const currentTime = Date.now() / 1000;
-            return decodedToken.exp && currentTime > decodedToken.exp;
-        } catch (error) {
-            return true;
-        }
-    };
+    const [isLogin, setIsLogin] = useState<boolean>(false);
+    const [sessionUser, setSessionUser] = useState<any>(null); //받아오는 데이타의 세션유저이름
 
-    const users = useSelector((state: RootState) => state.data.users);
-    const memberId = localStorage.getItem('memberid');
-    const user = memberId ? users?.[memberId] : undefined;
-
-    const [isLogin, setIsLogin] = useState<boolean>(() => {
-        const token = localStorage.getItem('jwt');
-        return token ? !isTokenExpired(token) : false;
-    });
+    useEffect(() => {
+        axios
+            .get(`${lastUrl}/check-session`)
+            .then((response) => {
+                if (response.data.isLogin) {
+                    setIsLogin(true);
+                    setSessionUser(response.data.sessionUser);
+                }
+            })
+            .catch((error) => {
+                console.error('로그인 상태 확인 중 오류 발생:', error);
+            });
+    }, []);
 
     function handleMagnifierClick() {
         setisMagnifierClicked(!isMagnifierClicked);
@@ -110,25 +121,32 @@ function Header() {
         }
     }
 
-    function onClickLogout() {
-        setIsLogin(false);
-        try {
-            localStorage.removeItem('memberid');
-            localStorage.removeItem('jwt');
-            console.log('로그아웃 성공');
-        } catch (error) {
-            console.log('로그아웃 실패', error);
-        }
-    }
+    const onClickLogout = () => {
+        // 서버에 로그아웃 요청을 보냅니다.
+        axios
+            .post(`${lastUrl}/api/logout`)
+            .then((response) => {
+                if (response.data.success) {
+                    setIsLogin(false);
+                    setSessionUser(null);
+                    console.log('Successfully logged out');
+                }
+            })
+            .catch((error) => {
+                console.error('Error during logout:', error);
+            });
+    };
 
-    console.log('Member ID:', memberId);
-    console.log('User Data:', user);
-
-    useEffect(() => {
-        if (memberId && !user) {
-            dispatch(fetchUserById(memberId));
-        }
-    }, [memberId, user, dispatch]);
+    // function onClickLogout() {
+    // setIsLogin(false);
+    //     try {
+    //         localStorage.removeItem('memberid');
+    //         localStorage.removeItem('jwt');
+    //         console.log('로그아웃 성공');
+    //     } catch (error) {
+    //         console.log('로그아웃 실패', error);
+    //     }
+    // }
 
     return (
         <>
@@ -163,7 +181,7 @@ function Header() {
                         )}
                         {isLogin && (
                             <>
-                                <GeneralStyle>Hello, {user?.name}!</GeneralStyle>
+                                <GeneralStyle>Hello, !</GeneralStyle>
                                 <LoginbuttonStyle onClick={onClickLogout}>로그아웃</LoginbuttonStyle>
                             </>
                         )}
