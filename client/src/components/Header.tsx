@@ -148,7 +148,7 @@ const Relative = styled.div`
 const Templink = styled.div`
     display: none;
     position: absolute;
-    top: 24px;
+    top: 20px;
     width: 92px;
     height: 110px;
     /* border: 1px solid black; */
@@ -305,9 +305,9 @@ function Header() {
             <HeaderStyle>
                 <Headerwrap>
                     <LogoStyle>
-                        <Link to="/">
+                        <a href="/">
                             <div>일요시네마</div>
-                        </Link>
+                        </a>
                     </LogoStyle>
                     <CountryStyle>
                         <DomesticStyle>국내</DomesticStyle>

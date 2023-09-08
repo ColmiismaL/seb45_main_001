@@ -65,7 +65,7 @@ const Upper_lower = styled.div`
 
 const Ul_text = styled.div`
     font-size: 24px;
-    width: 100px;
+    width: 120px;
     margin-left: 52px;
 
     /* @media (max-width: 중형) {

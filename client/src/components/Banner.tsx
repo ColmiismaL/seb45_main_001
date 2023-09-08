@@ -115,9 +115,8 @@ const Iframe = styled.iframe`
   z-index: -1;
   //opacity: 0.65;
   border: none;
-  frameborder="0"
 
-  &::after {
+  &:after {
     content: "";
     position: absolute;
     top: 0;
