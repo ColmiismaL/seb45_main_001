@@ -7,9 +7,9 @@
 - `프로젝트 기간` : 2023.08.25 ~ 2023.09.19
 - `한줄 소개` : ' 추천영화(예고편) 별점/댓글 프로젝트 '
 - `배포 링크` : ' http://main-project-vite.s3-website.ap-northeast-2.amazonaws.com/ '
-- `사용자 요구사항 정의서` : ' https://docs.google.com/spreadsheets/d/1U7Vlj4t5spDbqPujWPVQcI-AfbUuPUzBybnNid8MrXM/edit#gid=847248528 '
+- `사용자 요구사항 정의서` : ' [Sheet](https://docs.google.com/spreadsheets/d/1U7Vlj4t5spDbqPujWPVQcI-AfbUuPUzBybnNid8MrXM/edit#gid=847248528) '
 - `테이블 명세서` : '  '
-- `API 명세서` : ' https://documenter.getpostman.com/view/27567184/2s9YC1VZ8Y#972a978e-5a16-4c25-acac-dc10b5571c0f '
+- `API 명세서` : ' [Postman](https://documenter.getpostman.com/view/27567184/2s9YC1VZ8Y#972a978e-5a16-4c25-acac-dc10b5571c0f) '
 
 
 ### 👨‍👨‍👧‍👧 Team
