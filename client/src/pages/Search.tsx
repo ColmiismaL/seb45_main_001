@@ -122,7 +122,7 @@ export function Searchcomponent() {
     const isMagnifierClicked = useSelector((state: { data: DataState }) => state.data.isMagnifierClicked);
     const searchData = useSelector((state: { data: DataState }) => state.data.searchData);
     const query = useSelector((state: { data: DataState }) => state.data.query);
-    const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+    const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 1000, y: 1000 });
 
     const handleMouseMove = (e: React.MouseEvent) => {
         setMousePosition({ x: e.clientX, y: e.clientY });
@@ -159,6 +159,7 @@ export function Searchcomponent() {
                                         onClick={() => {
                                             dispatch(updateMagnifier(false));
                                             dispatch(updateQuery(''));
+                                            window.scrollTo(0, 0);
                                         }}
                                     >
                                         <Moviewrap>
