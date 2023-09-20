@@ -386,6 +386,7 @@ function Header() {
 
     function handleMagnifierClick() {
         dispatch(updateMagnifier(!isMagnifierClicked));
+        dispatch(updateQuery(''));
         setIsAnimationFinished(false);
         if (!isMagnifierClicked) {
             console.log('검색바 열림!');
@@ -401,20 +402,19 @@ function Header() {
         return item.movieNm.toLowerCase().includes(query.toLowerCase());
     });
 
-    useEffect(() => {
-        if (location.pathname !== "/search" && isMagnifierClicked) {
-            dispatch(updateMagnifier(false));
-            console.log('검색바 닫힘!');
-        }
-    }, [location, isMagnifierClicked, dispatch]);
-
-    
-
     const onAnimationEnd = () => {
         if (!isMagnifierClicked) {
             setIsAnimationFinished(true);
         }
     };
+
+    useEffect(() => {
+        if (location.pathname !== "/search" && isMagnifierClicked) {
+            dispatch(updateMagnifier(false));
+            dispatch(updateQuery(''));
+            console.log('검색바 닫힘!');
+        }
+    }, [location, isMagnifierClicked, dispatch]);
 
     return (
         <>
