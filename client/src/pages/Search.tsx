@@ -138,6 +138,14 @@ export function Searchcomponent() {
         );
     });
 
+    useEffect(() => {
+        if (location.pathname !== "/search" && isMagnifierClicked) {
+            dispatch(updateMagnifier(false));
+            dispatch(updateQuery(''));
+            console.log('검색바 닫힘!');
+        }
+    }, [location, isMagnifierClicked, dispatch]);
+
     return (
         <>
             <BodySearch>
