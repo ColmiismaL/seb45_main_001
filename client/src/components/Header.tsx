@@ -386,21 +386,14 @@ function Header() {
 
     function handleMagnifierClick() {
         dispatch(updateMagnifier(!isMagnifierClicked));
-        dispatch(updateQuery(''));
         setIsAnimationFinished(false);
+        dispatch(updateQuery(''));
         if (!isMagnifierClicked) {
             console.log('검색바 열림!');
         } else {
             console.log('검색바 닫힘!');
         }
     }
-
-    const filteredData = searchData.filter((item) => {
-        if (query.trim() === '') {
-            return false;
-        }
-        return item.movieNm.toLowerCase().includes(query.toLowerCase());
-    });
 
     const onAnimationEnd = () => {
         if (!isMagnifierClicked) {
